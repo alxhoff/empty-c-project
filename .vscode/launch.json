@@ -11,7 +11,7 @@
             "cwd": "${workspaceFolder}/bin",
             "environment": [],
             "externalConsole": false,
-            "preLaunchTask": "Compile",
+            "preLaunchTask": "Compiling",
             "MIMode": "gdb",
             "setupCommands": [
                 {
