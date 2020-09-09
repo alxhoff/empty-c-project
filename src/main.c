@@ -79,6 +79,9 @@ roll_again:
     if(ret == ROLL)
     {
         roll_cup(my_cup);
+        for(int i = 0; i < my_cup->dice_count; i++){
+            printf("%d: %d\n", i, my_cup->dice[i]->current_value);
+        }
         goto roll_again;    
     }
     else if(ret == PRINT)

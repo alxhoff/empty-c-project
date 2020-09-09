@@ -5,10 +5,6 @@
 
 #include "yahtzee.h"
 
-struct die{
-    int max_value;
-    int current_value;
-};
 
 struct cup *create_cup( int dice_count )
 {
@@ -17,15 +13,15 @@ struct cup *create_cup( int dice_count )
     srand( (unsigned) time(&t)); //Cast time structure into random seed value
     
     //Allocates cup object
-    struct cup *ret = malloc( sizeof(struct cup) );
+    struct cup *ret = (struct cup *)malloc( sizeof(struct cup) );
     
     if( !ret ) //Check memory allocation didn't fail
         return NULL;
-
+    
     ret->dice_count = dice_count;
     
     //Allocates list of empty pointers to die objects
-    ret->dice = calloc( dice_count, sizeof(struct cup *) ); 
+    ret->dice = (struct cup *)calloc( dice_count, sizeof(struct cup *) ); 
 
     printf("Cup created\n");
     
@@ -40,7 +36,7 @@ signed char fill_cup( struct cup *cup_to_fill, int max_value )
         for (int i = 0; i < cup_to_fill->dice_count; i++ )
         {
             //Create each die in the array
-            cup_to_fill->dice[i] = malloc( sizeof(struct die) );
+            cup_to_fill->dice[i] = (struct die *)malloc( sizeof(struct die) );
 
             if (!cup_to_fill->dice[i])
                 return -1; //Negative value on error
