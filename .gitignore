@@ -1,4 +1,6 @@
 bin/*
+.cache
+.clangd
 build/*
 !bin/.gitkeep
 !build/.gitkeep
