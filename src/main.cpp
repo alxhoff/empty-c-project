@@ -1,4 +1,6 @@
-#include "ManagementSystem.hpp"
+#include "TaskFactory.hpp"
+
+#include <iostream>
 
 extern "C" {
 #include "main.h"
@@ -6,46 +8,20 @@ extern "C" {
 
 int main() {
 
-  ManagementSystem ms;
+  TaskFactory& tf = TaskFactory::getInstance();
 
-  ms.addCourse("IT", 1001, 3.5);
-  ms.addCourse("English", 1002, 4);
-  ms.addCourse("German", 1003, 4.25);
+  tf.create(eTaskTypes::NetworkTask, std::string("Network Task"),
+            std::string("192.168.1.1"), true, 4);
+  tf.create(eTaskTypes::FileIOTask, std::string("File IO Task"),
+            std::string("example.txt"), 0, true, 3);
+  tf.create(eTaskTypes::ComputationTask, std::string("Comp task 1"), 200, true,
+            2);
+  tf.create(eTaskTypes::ComputationTask, std::string("Comp task 2"), 500, true,
+            3);
 
-  ms.addGraduateStudent("Alex");
-  ms.addUndergraduateStudent("Franzi");
-  ms.addGraduateStudent("David");
-  ms.addGraduateStudent("Alex");
-  ms.addUndergraduateStudent("Matze");
+  Scheduler::getInstance().printTasks();
 
-  ms.listStudents();
-
-  ms.removeStudent(1);
-
-  ms.listStudents();
-
-  ms.listCourses();
-
-  ms.removeCourse(1002);
-
-  ms.listCourses();
-
-  std::shared_ptr<Student> student_alex = ms.findStudent(0);
-
-  student_alex->display();
-
-  student_alex->addCourse("IT", 4.0);
-  student_alex->addCourse("English", 6.0);
-
-  student_alex->display();
-
-  std::shared_ptr<Student> student_david = ms.findStudent("David");
-
-  student_david->addCourse("IT", 3.0);
-
-  student_david->display();
-
-  std::shared_ptr<Student> student_unknown = ms.findStudent("Unknown Student");
+  Scheduler::getInstance().run_join();
 
   return 0;
 }
