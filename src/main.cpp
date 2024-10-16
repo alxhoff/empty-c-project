@@ -1,7 +1,5 @@
 #include "TaskFactory.hpp"
 
-#include <iostream>
-
 extern "C" {
 #include "main.h"
 }
@@ -16,7 +14,7 @@ int main() {
             std::string("example.txt"), 0, true, 3);
   tf.create(eTaskTypes::ComputationTask, std::string("Comp task 1"), 200, true,
             2);
-  tf.create(eTaskTypes::ComputationTask, std::string("Comp task 2"), 500, true,
+  tf.create(eTaskTypes::ComputationTask, std::string("Comp task 2"), 500, false,
             3);
 
   Scheduler::getInstance().printTasks();

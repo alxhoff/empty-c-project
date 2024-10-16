@@ -22,8 +22,8 @@ void Scheduler::setFinishedTasks() const {
 void Scheduler::runTasks() const {
   std::vector<std::thread> threads;
 
-  for (std::shared_ptr<Task> task : taskList) {
-    threads.emplace_back(&Task::execute, task);
+  while(!pq.empty()) {
+    threads.emplace_back(&Task::execute, pq.top());
   }
 
   for (std::thread& t : threads) {
